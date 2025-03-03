@@ -13,12 +13,17 @@ const HomeScreen = () => {
           <ImageBackground source={require('../assets/images/splash1-mobile.jpg')} resizeMode="cover" style={styles.image}>
             <TouchableHighlight style={styles.buttonContainer} onPress={() => router.push('/login')}>
               <View style={styles.button}>
-                <ThemeText style={styles.buttonText}>Log in</ThemeText>
+                <ThemeText style={styles.buttonText}>Returning User</ThemeText>
               </View>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonContainer} onPress={() => router.push('/signup')}>
               <View style={styles.button}>
-                <ThemeText style={styles.buttonText}>Sign up</ThemeText>
+                <ThemeText style={styles.buttonText}>New User</ThemeText>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.buttonContainer} onPress={() => router.push('/home')}>
+              <View style={styles.button}>
+                <ThemeText style={styles.buttonText}>Temp Button</ThemeText>
               </View>
             </TouchableHighlight>
           </ImageBackground>
@@ -45,8 +50,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#497941',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#497941',
+    height: 40,
   },
   buttonText: {
     fontWeight: 'bold', 
