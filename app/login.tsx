@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
-import {ImageBackground, TextInput, View, StyleSheet, TouchableHighlight, Alert} from 'react-native';
+import {ImageBackground, TextInput, View, StyleSheet, TouchableHighlight} from 'react-native';
 import ThemeText from '@/components/ui/ThemeText'
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
-
-const login = () => {
-  Alert.alert('You tapped the button!');
-}
-
 const LoginScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onPress = () => {
+    alert(`${email} ${password}`);
+  }
     return (
       <SafeAreaProvider>
         <SafeAreaView style={styles.container} edges={['left', 'right']}>
@@ -20,13 +21,18 @@ const LoginScreen = () => {
             <TextInput
               style={styles.inputContainer}
               placeholder='example@email.com'
+              value={email}
+              onChangeText={setEmail}
             />
             <ThemeText type='subtitle' style={styles.text}>Password</ThemeText>
             <TextInput
               style={styles.inputContainer}
+              secureTextEntry={true}
               placeholder='*****'
+              value={password}
+              onChangeText={setPassword}
             />
-            <TouchableHighlight style={styles.buttonContainer} onPress={login}>
+            <TouchableHighlight style={styles.buttonContainer} onPress={onPress}>
               <View style={styles.button}>
                 <ThemeText style={styles.buttonText}>Log in</ThemeText>
               </View>
@@ -49,6 +55,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   inputContainer: {
+    height: 40,
     width: '80%',
     marginTop: 20,
     textAlign: 'center',
@@ -59,8 +66,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#497941',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#497941',
+    height: 40,
   },
   buttonText: {
     fontWeight: 'bold', 
