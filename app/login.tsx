@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, TextInput, View, StyleSheet, TouchableHighlight, Alert } from 'react-native';
+import { ImageBackground, TextInput, View, StyleSheet, TouchableHighlight, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import ThemeText from '@/components/ui/ThemeText';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -28,31 +28,42 @@ const LoginScreen = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <ImageBackground source={require('../assets/images/splash1-blur-mobile.jpg')} resizeMode="cover" style={styles.image}>
-          <ThemeText type='title'>Login to your</ThemeText>
-          <ThemeText type='title'>account</ThemeText>
-          <ThemeText type='caption'>Need an account? Sign up here.</ThemeText>
-          <ThemeText type='subtitle' style={styles.text}>Email</ThemeText>
-          <TextInput
-            style={styles.inputContainer}
-            placeholder='example@email.com'
-            value={email}
-            onChangeText={setEmail}
-          />
-          <ThemeText type='subtitle' style={styles.text}>Password</ThemeText>
-          <TextInput
-            style={styles.inputContainer}
-            secureTextEntry
-            placeholder='*****'
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableHighlight style={styles.buttonContainer} onPress={handleLogin}>
-            <View style={styles.button}>
-              <ThemeText style={styles.buttonText}>Log in</ThemeText>
-            </View>
-          </TouchableHighlight>
-        </ImageBackground>
+        <KeyboardAvoidingView 
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust based on platform
+        >
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <ImageBackground 
+              source={require('../assets/images/splash1-blur-mobile.jpg')} 
+              resizeMode="cover" 
+              style={styles.image}
+            >
+              <ThemeText type='title'>Login to your</ThemeText>
+              <ThemeText type='title'>account</ThemeText>
+              <ThemeText type='caption'>Need an account? Sign up here.</ThemeText>
+              <ThemeText type='subtitle' style={styles.text}>Email</ThemeText>
+              <TextInput
+                style={styles.inputContainer}
+                placeholder='example@email.com'
+                value={email}
+                onChangeText={setEmail}
+              />
+              <ThemeText type='subtitle' style={styles.text}>Password</ThemeText>
+              <TextInput
+                style={styles.inputContainer}
+                secureTextEntry
+                placeholder='*****'
+                value={password}
+                onChangeText={setPassword}
+              />
+              <TouchableHighlight style={styles.buttonContainer} onPress={handleLogin}>
+                <View style={styles.button}>
+                  <ThemeText style={styles.buttonText}>Log in</ThemeText>
+                </View>
+              </TouchableHighlight>
+            </ImageBackground>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -91,7 +102,12 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 20,
-  }
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default LoginScreen;
