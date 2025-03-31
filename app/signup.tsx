@@ -13,7 +13,7 @@ import {
 import ThemeText from "@/components/ui/ThemeText";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../firebaseConfig";
+import { app } from "@/firebaseConfig";
 import { useRouter } from "expo-router";
 
 const auth = getAuth(app);
@@ -25,7 +25,7 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
-  const router = useRouter(); // Navigation hook
+  const router = useRouter();
 
   const handleSignUp = async () => {
     if (password !== confPassword) {
@@ -46,7 +46,8 @@ const SignUpScreen = () => {
    
       router.replace("/home");
     } catch (error) {
-      Alert.alert("Sign-Up Failed", error.message);
+      const e = error as Error;
+      Alert.alert("Sign-Up Failed", e.message);
     }
   };
 
