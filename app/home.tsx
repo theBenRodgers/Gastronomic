@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Pressable, View, TouchableHighlight } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import ThemeText from '@/components/ui/ThemeText'
 import Header from '@/components/ui/Header'
 import { router } from 'expo-router';
+import { getAuth } from 'firebase/auth';
 
 const HomeScreen = () => {
   return (
@@ -22,7 +23,6 @@ const HomeScreen = () => {
             <ThemeText type='title'>Grocery List</ThemeText>
           </TouchableHighlight>
         </View>
-
       </SafeAreaView>
     </SafeAreaProvider>
   );
