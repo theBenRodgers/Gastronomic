@@ -3,14 +3,16 @@ import { View, StyleSheet, Text, Pressable } from 'react-native';
 import Modal from 'react-native-modal';
 import ThemeText from './ThemeText';
 import Ingredient from '@/interfaces/Ingredient';
+import deleteIngredient from '@/api/ingredients/deleteIngredient';
 
 interface Props {
   isVisible: boolean;
   ingredient: Ingredient;
   onClose: () => void;
+  onDelete: (ingredient: Ingredient) => void;
 }
 
-const IngredientModal = ({ isVisible, ingredient, onClose }: Props) => {
+const IngredientModal = ({ isVisible, ingredient, onClose, onDelete }: Props) => {
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
       <View style={styles.modalContent}>
@@ -24,6 +26,9 @@ const IngredientModal = ({ isVisible, ingredient, onClose }: Props) => {
 
         <Pressable style={styles.closeButton} onPress={onClose}>
           <ThemeText style={styles.buttonText}>Close</ThemeText>
+        </Pressable>
+        <Pressable style={styles.closeButton} onPress={() => onDelete(ingredient)}>
+          <ThemeText style={styles.buttonText}>Delete</ThemeText>
         </Pressable>
       </View>
     </Modal>

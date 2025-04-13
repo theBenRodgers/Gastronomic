@@ -18,6 +18,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "@/firebaseConfig";
 import { router } from 'expo-router';
 import postIngredient from "@/api/ingredients/postIngredient";
+import IngredientList from "@/components/ui/IngredientList";
 
 
 const NewIngredient = () => {
@@ -32,6 +33,7 @@ const NewIngredient = () => {
 
   const onSubmit = async () => {
     const ingredient = {
+      ingredient_id: null,
       name: title,
       brand: brand,
       servings: parseInt(servings),
@@ -52,67 +54,113 @@ const NewIngredient = () => {
           style={styles.keyboardAvoidingContainer}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <Text style={styles.title}>New Ingredient</Text>
-            <Text style={styles.text}>Title</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="Peanut Butter"
-              value={title}
-              onChangeText={setTitle}
-            />
-            <Text style={styles.text}>Brand</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="Jif"
-              value={brand}
-              onChangeText={setBrand}
-            />
-            <Text style={styles.text}>Servings</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="3"
-              value={servings}
-              onChangeText={setServings}
-            />
-            <Text style={styles.text}>Amount</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="1"
-              value={amount}
-              onChangeText={setAmount}
-            />
-            <Text style={styles.text}>Calories</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="100"
-              value={calories}
-              onChangeText={setCalories}
-            />
-            <Text style={styles.text}>Protein</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="10"
-              value={protein}
-              onChangeText={setProtein}
-            />
-            <Text style={styles.text}>Fat</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="10"
-              value={fat}
-              onChangeText={setFat}
-            />
-            <Text style={styles.text}>Carbs</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder="10"
-              value={carbs}
-              onChangeText={setCarbs}
-            />
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+              <Text style={styles.title}>New Ingredient</Text>
+              <Text style={styles.text}>Title</Text>
+              <TextInput
+                style={styles.inputContainer}
+                placeholder="Peanut Butter"
+                value={title}
+                onChangeText={setTitle}
+              />
+              <Text style={styles.text}>Brand</Text>
+              <TextInput
+                style={styles.inputContainer}
+                placeholder="Jif"
+                value={brand}
+                onChangeText={setBrand}
+              />
 
-            <Pressable style={styles.button} onPress={onSubmit}>
-              <ThemeText style={styles.buttonText}>Submit</ThemeText>
-            </Pressable>
+              <View style={styles.row}>
+                <View style={styles.inputGroup}>
+                  <Text style={styles.text}>Servings</Text>
+                  <TextInput
+                    style={styles.numInput}
+                    placeholder="3"
+                    value={servings}
+                    onChangeText={(text) => {
+                      const filtered = text.replace(/[^0-9]/g, '');
+                      setServings(filtered);
+                    }}
+                    keyboardType="numeric"
+                  />
+                </View>
+                <View style={styles.inputGroup}>
+                  <Text style={styles.text}>Amount</Text>
+                  <TextInput
+                    style={styles.numInput}
+                    placeholder="1"
+                    value={amount}
+                    onChangeText={(text) => {
+                      const filtered = text.replace(/[^0-9]/g, '');
+                      setAmount(filtered);
+                    }}
+                    keyboardType="numeric"
+                  />
+                </View>
+              </View>
+
+              <View style={styles.row}>
+                <View style={styles.inputGroup}>
+                    <Text style={styles.text}>Calories</Text>
+                    <TextInput
+                      style={styles.numInput}
+                      placeholder="100"
+                      value={calories}
+                      onChangeText={(text) => {
+                        const filtered = text.replace(/[^0-9]/g, '');
+                        setCalories(filtered);
+                      }}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                  <View style={styles.inputGroup}>
+                    <Text style={styles.text}>Protein</Text>
+                    <TextInput
+                      style={styles.numInput}
+                      placeholder="10"
+                      value={protein}
+                      onChangeText={(text) => {
+                        const filtered = text.replace(/[^0-9]/g, '');
+                        setProtein(filtered);
+                      }}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+                <View style={styles.row}>
+                  <View style={styles.inputGroup}>
+                    <Text style={styles.text}>Fat</Text>
+                    <TextInput
+                      style={styles.numInput}
+                      placeholder="10"
+                      value={fat}
+                      onChangeText={(text) => {
+                        const filtered = text.replace(/[^0-9]/g, '');
+                        setFat(filtered);
+                      }}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                  <View style={styles.inputGroup}>
+                    <Text style={styles.text}>Carbs</Text>
+                    <TextInput
+                      style={styles.numInput}
+                      placeholder="10"
+                      value={carbs}
+                      onChangeText={(text) => {
+                        const filtered = text.replace(/[^0-9]/g, '');
+                        setCarbs(filtered);
+                      }}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+
+              <Pressable style={styles.button} onPress={onSubmit}>
+                <ThemeText style={styles.buttonText}>Submit</ThemeText>
+              </Pressable>
+            </ScrollView>
           </KeyboardAvoidingView>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -124,9 +172,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "grey",
-  },
-  image: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -140,9 +185,16 @@ const styles = StyleSheet.create({
   inputContainer: {
     height: 40,
     width: "80%",
-    marginTop: 20,
+
     textAlign: "center",
     backgroundColor: "white",
+  },
+  numInput: {
+    height: 40,
+    width: 100,
+    textAlign: "center",
+    backgroundColor: "white",
+    marginHorizontal: 5,
   },
   buttonContainer: {
     width: "80%",
@@ -153,7 +205,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#497941",
     height: 40,
-  },
+    width: "60%",
+    marginTop: 40,
+    alignSelf: "center",
+    borderRadius: 5,
+  },  
   buttonText: {
     fontWeight: "bold",
   },
@@ -168,6 +224,17 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingBottom: 40,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginTop: 20,
+  },
+  inputGroup: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

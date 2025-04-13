@@ -21,7 +21,7 @@ const HomeScreen = () => {
                 <ThemeText style={styles.buttonText}>New User</ThemeText>
               </View>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.buttonContainer} onPress={() => router.push('/home')}>
+            <TouchableHighlight style={styles.buttonContainer} onPress={() => router.push('/preferences')}>
               <View style={styles.button}>
                 <ThemeText style={styles.buttonText}>Temp Button</ThemeText>
               </View>

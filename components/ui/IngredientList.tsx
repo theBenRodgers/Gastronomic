@@ -3,12 +3,14 @@ import { TouchableHighlight, View, StyleSheet, FlatList } from 'react-native';
 import ThemeText from './ThemeText';
 import IngredientModal from './IngredientModal';
 import Ingredient from '@/interfaces/Ingredient';
+import deleteIngredient from '@/api/ingredients/deleteIngredient';
 
 interface Props {
   ingredients: Ingredient[];
+  onRefresh: () => void;
 }
 
-const IngredientList = ({ ingredients }: Props) => {
+const IngredientList = ({ ingredients, onRefresh }: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
 
@@ -22,11 +24,21 @@ const IngredientList = ({ ingredients }: Props) => {
     setSelectedIngredient(null);
   };
 
+  const onDelete = async (ingredient: Ingredient) => {
+    if (ingredient.ingredient_id != null) {
+      await deleteIngredient(ingredient.ingredient_id);
+      onRefresh();
+    }
+    closeModal();
+  };
+
   return (
+
     <View style={styles.container}>
       <FlatList
         data={ingredients}
-        keyExtractor={(item, index) => index.toString()}
+        extraData={ingredients}
+        keyExtractor={(item) => item.ingredient_id?.toString() ?? Math.random().toString()}
         renderItem={({ item }) => (
           <TouchableHighlight onPress={() => openModal(item)}>
             <View style={styles.ingredientItem}>
@@ -43,12 +55,12 @@ const IngredientList = ({ ingredients }: Props) => {
           isVisible={modalVisible}
           ingredient={selectedIngredient}
           onClose={closeModal}
+          onDelete={onDelete}
         />
       )}
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {

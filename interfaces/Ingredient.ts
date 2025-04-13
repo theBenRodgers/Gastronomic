@@ -1,4 +1,5 @@
 interface Ingredient {
+  ingredient_id?: number | null;
   name: string;
   brand: string;
   servings?: number;
