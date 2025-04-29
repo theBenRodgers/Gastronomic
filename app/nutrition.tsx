@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Pressable, View, TouchableHighlight } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import ThemeText from '@/components/ui/ThemeText'
+import ThemeText from '@/components/theme/ThemeText'
 import { router } from 'expo-router';
 
 const NutritionScreen = () => {

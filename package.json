@@ -21,8 +21,13 @@
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
+<<<<<<< HEAD
+=======
+    "@rneui/themed": "^4.0.0-rc.8",
+>>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
     "expo": "~52.0.36",
     "expo-blur": "~14.0.3",
+    "expo-checkbox": "~4.0.1",
     "expo-constants": "~17.0.5",
     "expo-font": "~13.0.4",
     "expo-haptics": "~14.0.1",
@@ -39,6 +44,8 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.7",
+    "react-native-date-picker": "^5.0.12",
+    "react-native-element-dropdown": "^2.12.4",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-modal": "^14.0.0-rc.1",
     "react-native-reanimated": "~3.16.1",

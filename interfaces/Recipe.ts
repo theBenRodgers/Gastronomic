@@ -1,17 +1,29 @@
-import Ingredient from './Ingredient';
+import Instruction from "./Instruction";
+import SearchResult from "./SearchResult";
 
 interface Recipe {
-  title: string;
-  ingredients: Ingredient[];
-  instructions: string;
-  prep_time?: number;      // Time in minutes
-  cook_time?: number;
+  id: number;
+  name: string;
+  image: string;
+
   servings?: number;
-  calories?: number;
-  protein?: number;
-  fat?: number;
-  carbs?: number;
-  source_url?: string;     // URL to the recipe source
+  readyInMinutes?: number;
+  preparationMinutes?: number;
+  cookingMinutes?: number;
+
+  ingredients?: SearchResult[];
+  missedIngredientCount?: number;
+  missedIngredients?: SearchResult[];
+  usedIngredientCount?: number;
+  usedIngredients?: SearchResult[];
+
+  instructions?: Instruction[];
+
+  cuisines?: string[];
+  dishTypes?: string[];
+  occasions?: string[];
+
+  sourceUrl?: string;
 }
 
-export default Recipe;
+export default Recipe
