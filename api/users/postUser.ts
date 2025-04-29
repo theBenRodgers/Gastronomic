@@ -1,10 +1,10 @@
 import { auth } from "@/firebaseConfig";
-import Ingredient from "@/interfaces/Ingredient";
+import User from "@/interfaces/User";
 
-const deleteIngredient = async (iid : Number): Promise<void> => {
+const postUser = async (u : User): Promise<void> => {
   try {
     const LOCAL_IP = '10.0.2.2';
-    const API_URL = `http://${LOCAL_IP}:8000/ingredients?iid=${iid}`;
+    const API_URL = `http://${LOCAL_IP}:8000/ingredients`;
 
     const user = auth.currentUser;
     if (!user) {
@@ -14,11 +14,12 @@ const deleteIngredient = async (iid : Number): Promise<void> => {
     const idToken = await user.getIdToken(true);
     
     const response = await fetch(API_URL, {
-      method: 'DELETE',
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${idToken}`,
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(u),
     });
 
     if (!response.ok) {
@@ -26,9 +27,9 @@ const deleteIngredient = async (iid : Number): Promise<void> => {
     }
 
   } catch (error) {
-    console.error("Error deleting ingredients:", error);
+    console.error("Error fetching ingredients:", error);
     throw error;;
   }
-};
+}
 
-export default deleteIngredient;
+export default postUser;

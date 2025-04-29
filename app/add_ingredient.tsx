@@ -12,7 +12,7 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
-import ThemeText from "@/components/ui/ThemeText";
+import ThemeText from "@/components/theme/ThemeText";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "@/firebaseConfig";
@@ -59,7 +59,7 @@ const NewIngredient = () => {
               <Text style={styles.text}>Title</Text>
               <TextInput
                 style={styles.inputContainer}
-                placeholder="Peanut Butter"
+                placeholder="Apple"
                 value={title}
                 onChangeText={setTitle}
               />

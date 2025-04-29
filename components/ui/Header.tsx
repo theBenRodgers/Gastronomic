@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Pressable, View, StyleSheet } from 'react-native';
-import ThemeText from './ThemeText';
+import ThemeText from '../theme/ThemeText';
 import { router } from 'expo-router';
 
 interface Props {

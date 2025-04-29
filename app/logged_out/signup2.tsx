@@ -12,19 +12,19 @@ import {
   ScrollView,
   Text
 } from "react-native";
-import ThemeText from "@/components/ui/ThemeText";
+import ThemeText from "@/components/theme/ThemeText";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "@/firebaseConfig";
 import { useRouter } from "expo-router";
 
-const Preferences = () => {
+const SignUp2 = () => {
+  const [isGluFree, setGluFree] = useState(false);
+  const [isKeto, setKeto] = useState(false);
   const [isVegetarian, setVegetarian] = useState(false);
   const [isVegan, setVegan] = useState(false);
   const [isPescetarian, setPescetarian] = useState(false);
   const [isPaleo, setPaleo] = useState(false);
-  const [isKosher, setKosher] = useState(false);
-  const [isHalal, setHalal] = useState(false);
 
   const [isDairy, setDairy] = useState(false);
   const [isEgg, setEgg] = useState(false);
@@ -43,11 +43,15 @@ const Preferences = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["left", "right"]}>
         <ThemeText type="title">Tell us more!</ThemeText>
-        <SafeAreaView style={styles.section}>
-          <Text style={styles.subheader}>Dietary Preferences</Text>
+        <View style={styles.section}>
+          <Text style={styles.subheader}>Diet</Text>
           <View style={styles.columns}>
             {/* Column 1 */}
             <View style={styles.column}>
+              <View style={styles.row}>
+                <Checkbox style={styles.checkbox} value={isGluFree} onValueChange={setGluFree} />
+                <Text>Gluten Free</Text>
+              </View>
               <View style={styles.row}>
                 <Checkbox style={styles.checkbox} value={isVegetarian} onValueChange={setVegetarian} />
                 <Text>Vegetarian</Text>
@@ -56,14 +60,14 @@ const Preferences = () => {
                 <Checkbox style={styles.checkbox} value={isPescetarian} onValueChange={setPescetarian} />
                 <Text>Pescetarian</Text>
               </View>
-              <View style={styles.row}>
-                <Checkbox style={styles.checkbox} value={isKosher} onValueChange={setKosher} />
-                <Text>Kosher</Text>
-              </View>
             </View>
 
             {/* Column 2 */}
             <View style={styles.column}>
+              <View style={styles.row}>
+                <Checkbox style={styles.checkbox} value={isKeto} onValueChange={setKeto} />
+                <Text>Ketogenic</Text>
+              </View>
               <View style={styles.row}>
                 <Checkbox style={styles.checkbox} value={isVegan} onValueChange={setVegan} />
                 <Text>Vegan</Text>
@@ -72,14 +76,10 @@ const Preferences = () => {
                 <Checkbox style={styles.checkbox} value={isPaleo} onValueChange={setPaleo} />
                 <Text>Paleo</Text>
               </View>
-              <View style={styles.row}>
-                <Checkbox style={styles.checkbox} value={isHalal} onValueChange={setHalal} />
-                <Text>Halal</Text>
-              </View>
             </View>
           </View>
-        </SafeAreaView>
-        <SafeAreaView style={styles.section}>
+        </View>
+        <View style={styles.section}>
           <Text style={styles.subheader}>Allergies/Intolerances</Text>
           <View style={styles.columns}>
             {/* Column 1 */}
@@ -138,7 +138,7 @@ const Preferences = () => {
               </View>
             </View>
           </View>
-        </SafeAreaView>
+        </View>
         <TouchableHighlight style={styles.buttonContainer} onPress={() => alert("HEy!")}>
           <View style={styles.button}>
             <ThemeText style={styles.buttonText}>Submit</ThemeText>
@@ -204,4 +204,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Preferences;
+export default SignUp2;

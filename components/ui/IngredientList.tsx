@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TouchableHighlight, View, StyleSheet, FlatList } from 'react-native';
-import ThemeText from './ThemeText';
-import IngredientModal from './IngredientModal';
-import Ingredient from '@/interfaces/Ingredient';
+import ThemeText from '../theme/ThemeText';
+import IngredientModal from '../modals/IngredientModal';
+import SearchResult from '@/interfaces/SearchResult';
 import deleteIngredient from '@/api/ingredients/deleteIngredient';
 
 interface Props {

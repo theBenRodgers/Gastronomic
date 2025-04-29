@@ -1,7 +1,7 @@
 import { auth } from "@/firebaseConfig";
-import Ingredient from "@/interfaces/Ingredient";
+import User from "@/interfaces/User";
 
-const getIngredients = async (): Promise<Ingredient[]> => {
+const getUser = async (): Promise<User> => {
   try {
     const LOCAL_IP = '10.0.2.2';
     const API_URL = `http://${LOCAL_IP}:8000/ingredients`;
@@ -14,7 +14,7 @@ const getIngredients = async (): Promise<Ingredient[]> => {
     const idToken = await user.getIdToken(true);
     
     const response = await fetch(API_URL, {
-      method: 'GET',
+      method: 'Get',
       headers: {
         'Authorization': `Bearer ${idToken}`,
         'Content-Type': 'application/json',
@@ -25,12 +25,12 @@ const getIngredients = async (): Promise<Ingredient[]> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: Ingredient[] = await response.json();
+    const data: User = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching ingredients:", error);
-    return [];
+    throw error;;
   }
-};
+}
 
-export default getIngredients;
+export default getUser;

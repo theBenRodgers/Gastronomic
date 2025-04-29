@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, TextInput, View, StyleSheet, TouchableHighlight, Alert, Keyboard, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import ThemeText from '@/components/ui/ThemeText';
+import ThemeText from '@/components/theme/ThemeText';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '@/firebaseConfig';
@@ -23,7 +23,7 @@ const LoginScreen = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       Alert.alert('Login Successful', `Welcome, ${user.email}`);
-      router.push('/home'); // Navigate to /home (HomeScreen)
+      router.push('/home');
     } catch (error) {
       const e = error as Error;
       console.error(e.message);
@@ -44,7 +44,7 @@ const LoginScreen = () => {
         >
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <ImageBackground 
-              source={require('../assets/images/splash1-blur-mobile.jpg')} 
+              source={require('../../assets/images/splash1-blur-mobile.jpg')} 
               resizeMode="cover" 
               style={styles.image}
             >
