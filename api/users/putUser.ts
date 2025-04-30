@@ -1,10 +1,10 @@
 import { auth } from "@/firebaseConfig";
-import User from "@/interfaces/User";
+import AppUser from "@/interfaces/AppUser";
 
-const putUser = async (u : User): Promise<void> => {
+const putUser = async (u : AppUser): Promise<void> => {
   try {
     const LOCAL_IP = '10.0.2.2';
-    const API_URL = `http://${LOCAL_IP}:8000/ingredients`;
+    const API_URL = `http://${LOCAL_IP}:8000/user`;
 
     const user = auth.currentUser;
     if (!user) {

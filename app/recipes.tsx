@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import ThemeText from '@/components/theme/ThemeText'
-import Header from '@/components/ui/Header'
+import HeaderA from '@/components/ui/HeaderA'
 import Footer from '@/components/ui/Footer'
 import RecipesLogo from '@/assets/images/recipeslogo.png';
 import { router } from 'expo-router';
@@ -13,13 +13,13 @@ const RecipesScreen = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <Header>
+        <HeaderA>
           <Image
             source={RecipesLogo}
             style={styles.logo}
             resizeMode="contain"
           />
-        </Header>
+        </HeaderA>
 
         <View style={styles.centerContent}>
           {/* Your recipes content */}

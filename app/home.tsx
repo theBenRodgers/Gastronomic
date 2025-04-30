@@ -4,7 +4,7 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 
 import ThemeText from '@/components/theme/ThemeText'
-import Header from '@/components/ui/Header'
+import HeaderA from '@/components/ui/HeaderA'
 import colors from '@/components/theme/colors';
 
 
@@ -15,56 +15,46 @@ const HomeScreen = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-        <View style={styles.innerContainer}>
-          <Header>Welcome Back!</Header>
+        <HeaderA>Welcome Back!</HeaderA>
 
-          <View style={[styles.centerContent, Platform.OS === 'android' && styles.androidCenter]}>
-            <View style={styles.row}>
-              <TouchableHighlight
-                style={[styles.button, isSmallScreen && styles.smallButton]}
-                onPress={() => router.navigate('/search_screen')}
-              >
-                <ThemeText type="title">My Pantry</ThemeText>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={[styles.button, isSmallScreen && styles.smallButton]}
-                onPress={() => router.navigate('/recipes')}
-              >
-                <ThemeText type="title">My Recipes</ThemeText>
-              </TouchableHighlight>
-            </View>
+        <View style={[styles.centerContent, Platform.OS === 'android' && styles.androidCenter]}>
+          <TouchableHighlight
+            style={[styles.button, isSmallScreen && styles.smallButton]}
+            onPress={() => router.navigate('/PantryScreen')}
+          >
+            <ThemeText type="title">My Pantry</ThemeText>
+          </TouchableHighlight>
 
-            <View style={styles.row}>
-              <TouchableHighlight
-                style={[styles.button, isSmallScreen && styles.smallButton]}
-                onPress={() => router.navigate('/search_screen')}
-              >
-                <ThemeText type="title">Search P</ThemeText>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={[styles.button, isSmallScreen && styles.smallButton]}
-                onPress={() => router.navigate('/recipes_search')}
-              >
-                <ThemeText type="title">Search R</ThemeText>
-              </TouchableHighlight>
-            </View>
+          <TouchableHighlight
+            style={[styles.button, isSmallScreen && styles.smallButton]}
+            onPress={() => router.navigate('/recipes')}
+          >
+            <ThemeText type="title">My Recipes</ThemeText>
+          </TouchableHighlight>
 
-            <View style={styles.row}>
-              <TouchableHighlight
-                style={[styles.button, isSmallScreen && styles.smallButton]}
-                onPress={() => router.navigate('/grocery')}
-              >
-                <ThemeText type="title">Grocery</ThemeText>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={[styles.button, isSmallScreen && styles.smallButton]}
-                onPress={() => router.navigate('/settings')}
-              >
-                <ThemeText type="title">Profile</ThemeText>
-              </TouchableHighlight>
-            </View>
-          </View>
+          <TouchableHighlight
+            style={[styles.button, isSmallScreen && styles.smallButton]}
+            onPress={() => router.navigate('/RecipeScreen')}
+          >
+            <ThemeText type="title">Search Recipes</ThemeText>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[styles.button, isSmallScreen && styles.smallButton]}
+            onPress={() => router.navigate('/search_screen')}
+          >
+            <ThemeText type="title">Search Pantry Items</ThemeText>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[styles.button, isSmallScreen && styles.smallButton]}
+            onPress={() => router.navigate('/settings')}
+          >
+            <ThemeText type="title">Profile</ThemeText>
+          </TouchableHighlight>
+
         </View>
+
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -77,7 +67,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 25 : 0, // extra padding for Android status bar
+    paddingTop: Platform.OS === 'android' ? 25 : 0,
   },
   row: {
     flexDirection: 'row',

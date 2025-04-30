@@ -3,7 +3,7 @@ import { View, ActivityIndicator } from 'react-native';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
 
-import SplashScreen from './logged_out/splash';
+import SplashScreen from './splash';
 import HomeScreen from './home';
 
 const Index = () => {

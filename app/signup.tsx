@@ -12,16 +12,16 @@ import {
 } from "react-native";
 import ThemeText from "@/components/ui/ThemeText";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "@/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebaseConfig";
 import { useRouter } from "expo-router";
-
-const auth = getAuth(app);
+import postUser from "@/api/users/postUser";
+import AppUser from "@/interfaces/AppUser";
 
 const SignUpScreen = () => {
-  const [name, setName] = useState("");
+  const [fname, setfName] = useState("");
+  const [lname, setlName] = useState("");
   const [email, setEmail] = useState("");
-  const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
@@ -30,6 +30,8 @@ const SignUpScreen = () => {
   const handleSignUp = async () => {
     if (password !== confPassword) {
       Alert.alert("Error", "Passwords do not match");
+      setPassword("");
+      setConfPassword("");
       return;
     }
 
@@ -39,12 +41,16 @@ const SignUpScreen = () => {
         email,
         password
       );
-      const user = userCredential.user;
+      const user: AppUser = {
+        fname: fname,
+        lname: lname,
+        diets: [],
+        intolerances: [],
+      }
+      await postUser(user);
+      
 
-      Alert.alert("Sign-Up Successful", `Welcome, ${user.email}`);
-
-   
-      router.replace("/home");
+      router.replace("./signup2");
     } catch (error) {
       const e = error as Error;
       Alert.alert("Sign-Up Failed", e.message);
@@ -68,12 +74,20 @@ const SignUpScreen = () => {
               <ThemeText type="title">account</ThemeText>
               <ThemeText type="caption">Already Registered? Log in here.</ThemeText>
 
-              <ThemeText type="subtitle" style={styles.text}>Name</ThemeText>
+              <ThemeText type="subtitle" style={styles.text}>First Name</ThemeText>
               <TextInput
                 style={styles.inputContainer}
-                placeholder="John Doe"
-                value={name}
-                onChangeText={setName}
+                placeholder="John"
+                value={fname}
+                onChangeText={setfName}
+              />
+
+              <ThemeText type="subtitle" style={styles.text}>Last Name</ThemeText>
+              <TextInput
+                style={styles.inputContainer}
+                placeholder="Doe"
+                value={lname}
+                onChangeText={setlName}
               />
 
               <ThemeText type="subtitle" style={styles.text}>Email</ThemeText>
@@ -82,14 +96,6 @@ const SignUpScreen = () => {
                 placeholder="example@email.com"
                 value={email}
                 onChangeText={setEmail}
-              />
-
-              <ThemeText type="subtitle" style={styles.text}>Date of Birth</ThemeText>
-              <TextInput
-                style={styles.inputContainer}
-                placeholder="MM/DD/YYYY"
-                value={dob}
-                onChangeText={setDob}
               />
 
               <ThemeText type="subtitle" style={styles.text}>Password</ThemeText>

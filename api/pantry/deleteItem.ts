@@ -1,5 +1,5 @@
 import { auth } from "@/firebaseConfig";
-import SearchResult from "@/interfaces/PantryItem";
+import PantryItem from "@/interfaces/PantryItem";
 
 const deleteItem = async (pantry_id: number): Promise<void> => {
   try {

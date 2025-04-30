@@ -7,14 +7,14 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Header = ({ children }: Props) => {
+const HeaderA = ({ children }: Props) => {
   return(
     <View style={styles.container}>
-      <Pressable onPress={() => router.push('/NewIngredient')}>
+      <Pressable onPress={() => router.navigate('/NewIngredient')}>
         <Image source={require('../../assets/images/plus-icon.png')} style={styles.plusIcon}/>
       </Pressable>
       <ThemeText type='title'>{children}</ThemeText>
-      <Pressable onPress={() => alert('cam clicked')}>
+      <Pressable onPress={() => router.navigate('/ScanScreen')}>
         <Image source={require('../../assets/images/cam-icon.png')} style={styles.camIcon}/>
       </Pressable>
     </View>
@@ -43,4 +43,4 @@ const styles = StyleSheet.create ({
   },
 });
 
-export default Header;
+export default HeaderA;

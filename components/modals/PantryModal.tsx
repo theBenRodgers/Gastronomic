@@ -10,6 +10,7 @@ import addItem from '@/api/pantry/addItem';
 import extraIng from '@/api/ingredients/extraIng';
 import changeItem from '@/api/pantry/changeItem';
 import DatePicker from 'react-native-date-picker';
+import deleteItem from '@/api/pantry/deleteItem';
 
 
 interface Props {
@@ -96,12 +97,24 @@ const PantryModal = ({ isVisible, item, newEntry, onClose }: Props) => {
       item.carbs = parseInt(carbs, 10) || 0;
       if (newEntry) {
         addItem(item);
+        onClose();
       } else {
-        changeItem(item)
+        changeItem(item);
       }
-
     }
   }
+
+  const handleDelete = async () => {
+    try {
+      if (item.pantry_id) {
+        await deleteItem(item.pantry_id);
+      }
+      onClose();
+    } catch (err) {
+      Alert.alert("Error", "Could not delete item.");
+      console.error(err);
+    }
+  };
 
   const getMacros = async () => {
     if (checkRequired()) {

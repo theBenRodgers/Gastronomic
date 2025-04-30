@@ -1,6 +1,6 @@
 import ThemeText from '@/components/theme/ThemeText';
 import Recipe from '@/interfaces/Recipe';
-import SearchResult from '@/interfaces/PantryItem';
+import PantryItem from '@/interfaces/PantryItem';
 import Instruction from '@/interfaces/Instruction';
 import React from 'react';
 import {
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const RecipeView = ({ recipe }: Props) => {
-  const renderIngredient: ListRenderItem<SearchResult> = ({ item }) => {
+  const renderIngredient: ListRenderItem<PantryItem> = ({ item }) => {
     const metaText = item.meta?.length ? `(${item.meta.join(', ')})` : '';
 
     return (
@@ -62,7 +62,7 @@ const RecipeView = ({ recipe }: Props) => {
           <ThemeText type="title" style={styles.subHeader}>
             Ingredients
           </ThemeText>
-          <FlatList<SearchResult>
+          <FlatList<PantryItem>
             data={recipe.ingredients}
             renderItem={renderIngredient}
             keyExtractor={(ing) => ing.id.toString()}

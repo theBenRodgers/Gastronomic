@@ -1,9 +1,9 @@
 import { auth } from "@/firebaseConfig";
 import { getURL } from "@/backendConfig";
-import RecipeResults from "@/interfaces/RecipeResults";
+import Recipe from "@/interfaces/Recipe";
 import RecipeRequest from "@/interfaces/RecipeRequest";
 
-const recipeSearch = async (request: RecipeRequest): Promise<RecipeResults> => {
+const recipeSearch = async (request: RecipeRequest): Promise<Recipe[]> => {
   try {
     const API_URL = getURL(`/recipes/search`);
 
@@ -27,7 +27,7 @@ const recipeSearch = async (request: RecipeRequest): Promise<RecipeResults> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: RecipeResults = await response.json();
+    const data: Recipe[] = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching ingredients:", error);

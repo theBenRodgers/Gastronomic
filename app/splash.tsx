@@ -21,14 +21,14 @@ const SplashScreen = () => {
 	  <SafeAreaProvider>
 		<SafeAreaView style={styles.container} edges={['left', 'right']}>
 		  <ImageBackground
-			source={require('../../assets/images/splash1-mobile.jpg')}
+			source={require('../assets/images/splash1-mobile.jpg')}
 			resizeMode="cover"
 			style={styles.image}
 		  >
 			<View style={styles.content}>
 			  <View style={styles.logoContainer}>
 				<Image
-				  source={require('../../assets/images/logo.png')}
+				  source={require('../assets/images/logo.png')}
 				  style={styles.logo}
 				/>
 			  </View>
@@ -36,7 +36,7 @@ const SplashScreen = () => {
 			  <View style={styles.buttonGroup}>
 				<TouchableHighlight
 				  style={styles.buttonContainer}
-				  onPress={() => router.navigate('../login')}
+				  onPress={() => router.replace('/login')}
 				>
 				  <View style={styles.button}>
 					<ThemeText style={styles.buttonText}>Returning User</ThemeText>
@@ -45,7 +45,7 @@ const SplashScreen = () => {
   
 				<TouchableHighlight
 				  style={styles.buttonContainer}
-				  onPress={() => router.push('../signup')}
+				  onPress={() => router.replace('/signup')}
 				>
 				  <View style={styles.button}>
 					<ThemeText style={styles.buttonText}>New User</ThemeText>
@@ -78,10 +78,10 @@ const SplashScreen = () => {
 	  flex: 1,
 	  justifyContent: 'center',
 	  alignItems: 'center',
-	  paddingTop: Platform.OS === 'ios' ? 60 : 30, // Responsive spacing for logo
+	  paddingTop: Platform.OS === 'ios' ? 60 : 30, 
 	},
 	logoContainer: {
-	  height: 200, // Takes up space without pushing buttons
+	  height: 200,
 	  justifyContent: 'center',
 	  alignItems: 'center',
 	  marginBottom: -30,

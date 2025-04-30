@@ -1,10 +1,10 @@
 import { auth } from "@/firebaseConfig";
-import User from "@/interfaces/User";
+import AppUser from "@/interfaces/AppUser";
 
-const getUser = async (): Promise<User> => {
+const getUser = async (): Promise<AppUser> => {
   try {
     const LOCAL_IP = '10.0.2.2';
-    const API_URL = `http://${LOCAL_IP}:8000/ingredients`;
+    const API_URL = `http://${LOCAL_IP}:8000/user`;
 
     const user = auth.currentUser;
     if (!user) {
@@ -25,7 +25,7 @@ const getUser = async (): Promise<User> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: User = await response.json();
+    const data: AppUser = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching ingredients:", error);

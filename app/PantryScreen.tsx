@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import PantryItem from '@/interfaces/PantryItem';
 import { useFocusEffect } from '@react-navigation/native';
-import Header from '@/components/ui/Header';
+import HeaderA from '@/components/ui/HeaderA';
 import Footer from '@/components/ui/Footer';
 import getAll from '@/api/pantry/getAll';
-import ResultsList from '@/components/ui/PantryList';
+import PantryList from '@/components/ui/PantryList';
 
 
 const PantryScreen = () => {
@@ -24,8 +24,12 @@ const PantryScreen = () => {
 
   return (
     <View style={{ flex: 1 , backgroundColor: 'white'}}>
-      <Header>Ingredients</Header>
-      <ResultsList list={results} />
+      <HeaderA>Pantry</HeaderA>
+      <PantryList 
+        list={results}
+        search={false}  
+      />
+      
       <Footer />
     </View>
   );

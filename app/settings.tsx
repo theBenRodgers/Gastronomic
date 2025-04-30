@@ -40,8 +40,8 @@ const Settings = () => {
   const loadUser = async () => {
     try {
       const user = await getUser();
-      const intolerances = user.intolerances.split(",");
-      const diets = user.diets.split(",");
+      const intolerances = user.intolerances;
+      const diets = user.diets;
 
       setfName(user.fname);
       setlName(user.lname);
@@ -108,8 +108,8 @@ const Settings = () => {
       const updatedUser = {
         fname: fName,
         lname: lName,
-        diets: newDiets.join(","),
-        intolerances: newIntolerances.join(","),
+        diets: newDiets,
+        intolerances: newIntolerances,
       };
   
       await putUser(updatedUser);

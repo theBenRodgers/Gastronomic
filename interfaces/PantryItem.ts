@@ -15,18 +15,18 @@ interface PantryItem {
 
   // Ingredient specific extra information
   unit?: string;
-  possibleUnits?: [string];
+  possibleUnits?: string[];
   estimatedCost?: number;
-  shoppingListUnits?: [string];
+  shoppingListUnits?: string[];
   aisle?: string;
-  categoryPath?: [string];
+  categoryPath?: string[];
   weightPerServing?: number;
-  meta?: [string];
+  meta?: string[];
 
   // Product specific extra information
   upc?: string;
   price?: number;
-  breadcrumbs?: [string];
+  breadcrumbs?: string[];
   category?: string;
 
   // Both

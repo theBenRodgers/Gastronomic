@@ -1,7 +1,7 @@
 import { auth } from "@/firebaseConfig";
-import SearchResult from "@/interfaces/PantryItem";
+import PantryItem from "@/interfaces/PantryItem";
 
-const getOne = async (pantry_id: number): Promise<SearchResult> => {
+const getOne = async (pantry_id: number): Promise<PantryItem> => {
   try {
     const LOCAL_IP = '10.0.2.2';
     const API_URL = `http://${LOCAL_IP}:8000/pantry/item?pantry_id=${pantry_id}`;
@@ -25,7 +25,7 @@ const getOne = async (pantry_id: number): Promise<SearchResult> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: SearchResult = await response.json();
+    const data: PantryItem = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching item:", error);

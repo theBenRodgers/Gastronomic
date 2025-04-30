@@ -2,9 +2,9 @@ import { auth } from "@/firebaseConfig";
 import { getURL } from "@/backendConfig";
 import PantryItem from "@/interfaces/PantryItem";
 
-const extraIng = async (item: PantryItem): Promise<PantryItem> => {
+const prodUPC = async (upc: string): Promise<PantryItem> => {
   try {
-    const API_URL = getURL(`ingredients/extra?id=${item.id}&unit=${item.unit}`);
+    const API_URL = getURL(`products/upc?upc=${upc}`);
 
     const user = auth.currentUser;
     if (!user) {
@@ -25,18 +25,12 @@ const extraIng = async (item: PantryItem): Promise<PantryItem> => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    item.calories = data.calories;
-    item.protein = data.protein;
-    item.fat = data.fat;
-    item.carbs = data.carbs;
-    item.estimatedCost = data.estimatedCost;
-    item.weightPerServing = data.weightPerServing;
-    return item;
+    const data: PantryItem = await response.json();
+    return data;
   } catch (error) {
-    console.error("Error fetching ingredients:", error);
+    console.error("Error fetching Product:", error);
     throw error;
   }
 };
 
-export default extraIng;
+export default prodUPC;

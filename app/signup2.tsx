@@ -16,7 +16,9 @@ import ThemeText from "@/components/theme/ThemeText";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "@/firebaseConfig";
-import { useRouter } from "expo-router";
+import { router, useRouter } from "expo-router";
+import getUser from '@/api/users/getUser';
+import putUser from '@/api/users/putUser';
 
 const SignUp2 = () => {
   const [isGluFree, setGluFree] = useState(false);
@@ -39,6 +41,49 @@ const SignUp2 = () => {
   const [isTreeNut, setTreeNut] = useState(false);
   const [isWheat, setWheat] = useState(false);
   
+  const handleSubmit = async () => {
+    const user = await getUser();
+
+    const newDiets = [];
+    const newIntolerances = [];
+  
+    // Diets
+    if (isGluFree) newDiets.push("gluten free");
+    if (isKeto) newDiets.push("ketogenic");
+    if (isVegetarian) newDiets.push("vegetarian");
+    if (isVegan) newDiets.push("vegan");
+    if (isPescetarian) newDiets.push("pescetarian");
+    if (isPaleo) newDiets.push("paleo");
+  
+    // Intolerances
+    if (isDairy) newIntolerances.push("dairy");
+    if (isEgg) newIntolerances.push("egg");
+    if (isGluten) newIntolerances.push("gluten");
+    if (isGrain) newIntolerances.push("grain");
+    if (isPeanut) newIntolerances.push("peanut");
+    if (isSeafood) newIntolerances.push("seafood");
+    if (isSesame) newIntolerances.push("sesame");
+    if (isShellfish) newIntolerances.push("shellfish");
+    if (isSoy) newIntolerances.push("soy");
+    if (isSulfite) newIntolerances.push("sulfite");
+    if (isTreeNut) newIntolerances.push("tree nut");
+    if (isWheat) newIntolerances.push("wheat");
+  
+    try {
+      const updatedUser = {
+        fname: user.fname,
+        lname: user.lname,
+        diets: newDiets,
+        intolerances: newIntolerances,
+      };
+  
+      await putUser(updatedUser);
+      router.replace('../home')
+    } catch (error) {
+      console.error("Error saving user data:", error);
+    }
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -144,7 +189,7 @@ const SignUp2 = () => {
             <ThemeText style={styles.buttonText}>Submit</ThemeText>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => alert("HEy!")}>
+        <TouchableHighlight onPress={handleSubmit}>
           <Text>Skip</Text>
         </TouchableHighlight>
       </SafeAreaView>

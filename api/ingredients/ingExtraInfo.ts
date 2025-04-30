@@ -1,8 +1,8 @@
 import { auth } from "@/firebaseConfig";
 import { getURL } from "@/backendConfig";
-import SearchResult from "@/interfaces/PantryItem";
+import PantryItem from "@/interfaces/PantryItem";
 
-const ingExtraInfo = async (item: SearchResult): Promise<SearchResult> => {
+const ingExtraInfo = async (item: PantryItem): Promise<PantryItem> => {
   try {
     const API_URL = getURL(`ingredients/info?id=${item.id}`);
 

@@ -1,8 +1,8 @@
 import { auth } from "@/firebaseConfig";
 import { getURL } from "@/backendConfig";
-import SearchResults from "@/interfaces/PantryResults";
+import PantryItem from "@/interfaces/PantryItem";
 
-const prodSearch = async (query: string, page: number): Promise<SearchResults> => {
+const prodSearch = async (query: string, page: number): Promise<PantryItem[]> => {
   try {
     const API_URL = getURL(`products/search?query=${query}&page=${page}`);
 
@@ -25,7 +25,7 @@ const prodSearch = async (query: string, page: number): Promise<SearchResults> =
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: SearchResults = await response.json();
+    const data: PantryItem[] = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching ingredients:", error);

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import ThemeText from '@/components/theme/ThemeText'
-import Header from '@/components/ui/Header'
+import HeaderA from '@/components/ui/HeaderA'
 import Footer from '@/components/ui/Footer'
 import { router } from 'expo-router';
 
@@ -10,7 +10,7 @@ const GroceryScreen = () => {
 return(
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <Header>Grocery List</Header>  
+        <HeaderA>Grocery List</HeaderA>  
         <View style={styles.centerContent}>
 
         </View>

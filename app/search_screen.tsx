@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, FlatList, KeyboardAvoidingView, Platform, Pressable, TouchableHighlight, View, TextInput } from "react-native";
+import { Text, StyleSheet, Pressable, TouchableHighlight, View, TextInput } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { SearchBar } from "react-native-screens";
 
 import colors from "@/components/theme/colors";
 
 import prodSearch from "@/api/products/prodSearch";
 import PantryType from "@/types/PantryType";
-import ResultsList from "@/components/ui/PantryList";
-import SearchResults from "@/interfaces/PantryResults";
-import ThemeButton from "@/components/theme/ThemeButton";
 import ingSearch from "@/api/ingredients/ingSearch";
-import Footer from "@/components/ui/Footer";
 import PantryItem from "@/interfaces/PantryItem";
+import PantryList from "@/components/ui/PantryList";
 
 const SearchScreen = () => {
   const [kind, setKind] = useState<PantryType>('ingredient');
@@ -28,7 +24,7 @@ const SearchScreen = () => {
     } else {
       response = await prodSearch(query, page);
     }
-    setResults(response.results)
+    setResults(response);
   }
 
   const onToggle = () => {
@@ -79,8 +75,9 @@ const SearchScreen = () => {
             <Text style={styles.buttonText}>S</Text>
           </TouchableHighlight>
         </View>
-          <ResultsList
+          <PantryList
             list={results}
+            search={true}
           />
       </SafeAreaView>
     </SafeAreaProvider>

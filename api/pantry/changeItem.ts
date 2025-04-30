@@ -1,7 +1,7 @@
 import { auth } from "@/firebaseConfig";
-import SearchResult from "@/interfaces/PantryItem";
+import PantryItem from "@/interfaces/PantryItem";
 
-const changeItem = async (pantry_item: SearchResult): Promise<void> => {
+const changeItem = async (pantry_item: PantryItem): Promise<void> => {
   try {
     const LOCAL_IP = '10.0.2.2';
     const API_URL = `http://${LOCAL_IP}:8000/pantry`;

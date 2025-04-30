@@ -1,9 +1,9 @@
-import SearchResult from "./PantryItem";
+import PantryItem from "./PantryItem";
 
 interface Instruction {
   number: number;
   step: string;
-  ingredients?: SearchResult[];
+  ingredients?: PantryItem[];
 }
 
 export default Instruction

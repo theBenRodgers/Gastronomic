@@ -1,5 +1,5 @@
 import Instruction from "./Instruction";
-import SearchResult from "./PantryItem";
+import PantryItem from "./PantryItem";
 
 interface Recipe {
   id: number;
@@ -11,11 +11,11 @@ interface Recipe {
   preparationMinutes?: number;
   cookingMinutes?: number;
 
-  ingredients?: SearchResult[];
+  ingredients?: PantryItem[];
   missedIngredientCount?: number;
-  missedIngredients?: SearchResult[];
+  missedIngredients?: PantryItem[];
   usedIngredientCount?: number;
-  usedIngredients?: SearchResult[];
+  usedIngredients?: PantryItem[];
 
   instructions?: Instruction[];
 
