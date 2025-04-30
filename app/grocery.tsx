@@ -1,11 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-<<<<<<< HEAD
-import ThemeText from '@/components/ui/ThemeText'
-=======
 import ThemeText from '@/components/theme/ThemeText'
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
 import Header from '@/components/ui/Header'
 import Footer from '@/components/ui/Footer'
 import { router } from 'expo-router';

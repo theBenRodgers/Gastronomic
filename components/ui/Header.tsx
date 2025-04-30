@@ -1,10 +1,6 @@
 import React from 'react';
 import { Image, Pressable, View, StyleSheet } from 'react-native';
-<<<<<<< HEAD
-import ThemeText from './ThemeText';
-=======
 import ThemeText from '../theme/ThemeText';
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
 import { router } from 'expo-router';
 
 interface Props {

@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
 import { TouchableHighlight, View, StyleSheet, FlatList } from 'react-native';
-<<<<<<< HEAD
-import ThemeText from './ThemeText';
-import IngredientModal from './IngredientModal';
-import Ingredient from '@/interfaces/Ingredient';
-
-interface Props {
-  ingredients: Ingredient[];
-}
-
-const IngredientList = ({ ingredients }: Props) => {
-=======
 import ThemeText from '../theme/ThemeText';
 import IngredientModal from '../modals/IngredientModal';
 import SearchResult from '@/interfaces/SearchResult';
@@ -22,7 +11,6 @@ interface Props {
 }
 
 const IngredientList = ({ ingredients, onRefresh }: Props) => {
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
 
@@ -36,13 +24,6 @@ const IngredientList = ({ ingredients, onRefresh }: Props) => {
     setSelectedIngredient(null);
   };
 
-<<<<<<< HEAD
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={ingredients}
-        keyExtractor={(item, index) => index.toString()}
-=======
   const onDelete = async (ingredient: Ingredient) => {
     if (ingredient.ingredient_id != null) {
       await deleteIngredient(ingredient.ingredient_id);
@@ -58,7 +39,6 @@ const IngredientList = ({ ingredients, onRefresh }: Props) => {
         data={ingredients}
         extraData={ingredients}
         keyExtractor={(item) => item.ingredient_id?.toString() ?? Math.random().toString()}
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
         renderItem={({ item }) => (
           <TouchableHighlight onPress={() => openModal(item)}>
             <View style={styles.ingredientItem}>
@@ -75,20 +55,13 @@ const IngredientList = ({ ingredients, onRefresh }: Props) => {
           isVisible={modalVisible}
           ingredient={selectedIngredient}
           onClose={closeModal}
-<<<<<<< HEAD
-=======
           onDelete={onDelete}
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
         />
       )}
     </View>
   );
 };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
 const styles = StyleSheet.create({
   container: {
     flex: 2,

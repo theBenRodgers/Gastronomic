@@ -1,19 +1,30 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import ThemeText from '@/components/theme/ThemeText'
 import Header from '@/components/ui/Header'
 import Footer from '@/components/ui/Footer'
+import RecipesLogo from '@/assets/images/recipeslogo.png';
 import { router } from 'expo-router';
 
+const { width } = Dimensions.get('window');
+
 const RecipesScreen = () => {
-  return(
+  return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <Header>Recipes</Header>
+        <Header>
+          <Image
+            source={RecipesLogo}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </Header>
 
         <View style={styles.centerContent}>
+          {/* Your recipes content */}
         </View>
+
         <Footer />
       </SafeAreaView>
     </SafeAreaProvider>
@@ -24,49 +35,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-<<<<<<< HEAD
-    padding: width < 375 ? 10 : 20, // Adjust padding for smaller screens
-  },
-  keyboardAvoidingContainer: {
-    flex: 1,
-=======
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
   },
   centerContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-<<<<<<< HEAD
-    paddingHorizontal: 10,
+    paddingHorizontal: '5%',
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingLeft: 10,
-    width: '100%',
-    marginTop: Platform.OS === 'ios' ? 20 : 40, // Adjust margin for iOS/Android
-  },
-  recipeItem: {
-    marginBottom: 20,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    borderRadius: 5,
-    width: '100%',
-  },
-  recipeTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  noRecipesText: {
-    fontSize: 16,
-    color: 'gray',
-    textAlign: 'center',
-    marginTop: 20,
-=======
->>>>>>> a039d7c8e86091c9a535e2d9c8640d086b8d64e9
+  logo: {
+    width: 250,
+    height: 250,
+    maxWidth: 300,
+    maxHeight: 100,
   },
 });
 
