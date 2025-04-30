@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import DatePicker from 'react-native-date-picker'
 
 import ThemeText from '../theme/ThemeText';
-import SearchResult from '@/interfaces/SearchResult';
+import SearchResult from '@/interfaces/PantryItem';
 import PantryType from '@/types/PantryType';
 
 
@@ -64,50 +64,7 @@ const ProductModal = ({ isVisible, product, onClose }: Props) => {
     }
   }
 
-  return (
-    <Modal isVisible={isVisible} onBackdropPress={onClose}>
-      <View style={styles.modalContent}>
-        <ThemeText type='title'>{product.name} - {product.brand}</ThemeText>
-        <TextInput
-          placeholder="3"
-          value={amount}
-          onChangeText={(text) => {
-            const filtered = text.replace(/[^0-9]/g, '');
-            setAmount(filtered);
-          }}
-          keyboardType="numeric"
-        />
-        <View style={styles.row}>
-          <View style={styles.inputGroup}>
-            <Text style={styles.text}>ExpirationDate:</Text>
-            <Pressable
-              onPress={() => setOpen(true)}>
-              <Text> {expDate} </Text>
-            </Pressable>
-            <DatePicker
-              modal
-              open={open}
-              date={date}
-              onConfirm={(date) => {
-                setOpen(false)
-                setDate(date)
-                setExpDate(date.toISOString)
-              }}
-              onCancel={() => {
-                setOpen(false)
-              }}
-            />
-          </View>
-          <View style={styles.inputGroup}>
-            <Text style={styles.text}>Carbs: {product.carbs}</Text>
-          </View>
-        </View>
-        <TouchableHighlight style={styles.button} onPress={onSubmit}>
-          <ThemeText style={styles.buttonText}>Add to Pantry!</ThemeText>
-        </TouchableHighlight>
-      </View>
-    </Modal>
-  );
+  
 };
 
 const styles = StyleSheet.create({

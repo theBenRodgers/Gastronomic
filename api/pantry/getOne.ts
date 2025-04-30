@@ -1,5 +1,5 @@
 import { auth } from "@/firebaseConfig";
-import SearchResult from "@/interfaces/SearchResult";
+import SearchResult from "@/interfaces/PantryItem";
 
 const getOne = async (pantry_id: number): Promise<SearchResult> => {
   try {

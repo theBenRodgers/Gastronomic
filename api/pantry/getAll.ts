@@ -1,10 +1,10 @@
 import { auth } from "@/firebaseConfig";
-import SearchResults from "@/interfaces/SearchResults";
+import PantryItem from "@/interfaces/PantryItem";
 
-const getAll = async (page: number, perPage: number): Promise<SearchResults> => {
+const getAll = async (): Promise<PantryItem[]> => {
   try {
     const LOCAL_IP = '10.0.2.2';
-    const API_URL = `http://${LOCAL_IP}:8000/pantry?page=${page}&per_page=${perPage}`;
+    const API_URL = `http://${LOCAL_IP}:8000/pantry`;
 
     const user = auth.currentUser;
     if (!user) {
@@ -25,7 +25,7 @@ const getAll = async (page: number, perPage: number): Promise<SearchResults> => 
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: SearchResults = await response.json();
+    const data: PantryItem[] = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching pantry:", error);

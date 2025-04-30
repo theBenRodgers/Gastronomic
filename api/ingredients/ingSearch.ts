@@ -1,6 +1,6 @@
 import { auth } from "@/firebaseConfig";
 import { getURL } from "@/backendConfig";
-import SearchResults from "@/interfaces/SearchResults";
+import SearchResults from "@/interfaces/PantryResults";
 
 const ingSearch = async (query: string, page: number): Promise<SearchResults> => {
   try {

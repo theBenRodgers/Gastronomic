@@ -1,5 +1,5 @@
 import Instruction from "./Instruction";
-import SearchResult from "./SearchResult";
+import SearchResult from "./PantryItem";
 
 interface Recipe {
   id: number;

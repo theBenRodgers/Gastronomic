@@ -1,4 +1,4 @@
-interface SearchResult {
+interface PantryItem {
   // For back end db purposes
   pantry_id?: number;
 
@@ -21,6 +21,7 @@ interface SearchResult {
   aisle?: string;
   categoryPath?: [string];
   weightPerServing?: number;
+  meta?: [string];
 
   // Product specific extra information
   upc?: string;
@@ -37,4 +38,4 @@ interface SearchResult {
   expirationDate?: string;
 }
 
-export default SearchResult;
+export default PantryItem;

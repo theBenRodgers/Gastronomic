@@ -1,6 +1,6 @@
 import { auth } from "@/firebaseConfig";
 import { getURL } from "@/backendConfig";
-import SearchResult from "@/interfaces/SearchResult";
+import SearchResult from "@/interfaces/PantryItem";
 
 const extraIng = async (item: SearchResult): Promise<SearchResult> => {
   try {

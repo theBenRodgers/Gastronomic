@@ -1,4 +1,4 @@
-import SearchResult from "./SearchResult";
+import SearchResult from "./PantryItem";
 
 interface Instruction {
   number: number;

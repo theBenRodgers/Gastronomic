@@ -7,18 +7,19 @@ import colors from "@/components/theme/colors";
 
 import prodSearch from "@/api/products/prodSearch";
 import PantryType from "@/types/PantryType";
-import ResultsList from "@/components/ui/ResultsList";
-import SearchResults from "@/interfaces/SearchResults";
+import ResultsList from "@/components/ui/PantryList";
+import SearchResults from "@/interfaces/PantryResults";
 import ThemeButton from "@/components/theme/ThemeButton";
 import ingSearch from "@/api/ingredients/ingSearch";
 import Footer from "@/components/ui/Footer";
+import PantryItem from "@/interfaces/PantryItem";
 
 const SearchScreen = () => {
   const [kind, setKind] = useState<PantryType>('ingredient');
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0)
-  const [results, setResults] = useState<SearchResults | null>(null);
+  const [results, setResults] = useState<PantryItem[]>([]);
 
   const onSearch = async () => {
     let response;
@@ -27,7 +28,7 @@ const SearchScreen = () => {
     } else {
       response = await prodSearch(query, page);
     }
-    setResults(response)
+    setResults(response.results)
   }
 
   const onToggle = () => {
@@ -36,7 +37,7 @@ const SearchScreen = () => {
     } else {
       setKind("ingredient");
     }
-    setResults(null);
+    setResults([]);
   }
 
   return (
@@ -80,7 +81,6 @@ const SearchScreen = () => {
         </View>
           <ResultsList
             list={results}
-            type={kind}
           />
       </SafeAreaView>
     </SafeAreaProvider>
