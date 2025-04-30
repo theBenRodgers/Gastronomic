@@ -10,10 +10,10 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import ThemeText from "@/components/ui/ThemeText";
+import ThemeText from "@/components/theme/ThemeText";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../firebaseConfig";
+import { app } from "@/firebaseConfig";
 import { useRouter } from "expo-router";
 
 const auth = getAuth(app);
@@ -21,15 +21,21 @@ const auth = getAuth(app);
 const SignUpScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
-  const router = useRouter(); // Navigation hook
+  const router = useRouter();
 
   const handleSignUp = async () => {
     if (password !== confPassword) {
       Alert.alert("Error", "Passwords do not match");
+      setPassword("");
+      setConfPassword("");
+      return;
+    } else if (password.length < 8) {
+      Alert.alert("Error", "Password too short!");
+      setPassword("");
+      setConfPassword("");
       return;
     }
 
@@ -46,7 +52,8 @@ const SignUpScreen = () => {
    
       router.replace("/home");
     } catch (error) {
-      Alert.alert("Sign-Up Failed", error.message);
+      const e = error as Error;
+      Alert.alert("Sign-Up Failed", e.message);
     }
   };
 
@@ -59,7 +66,7 @@ const SignUpScreen = () => {
         >
           <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             <ImageBackground
-              source={require("../assets/images/splash1-blur-mobile.jpg")}
+              source={require("../../assets/images/splash1-blur-mobile.jpg")}
               resizeMode="cover"
               style={styles.image}
             >
@@ -81,14 +88,6 @@ const SignUpScreen = () => {
                 placeholder="example@email.com"
                 value={email}
                 onChangeText={setEmail}
-              />
-
-              <ThemeText type="subtitle" style={styles.text}>Date of Birth</ThemeText>
-              <TextInput
-                style={styles.inputContainer}
-                placeholder="MM/DD/YYYY"
-                value={dob}
-                onChangeText={setDob}
               />
 
               <ThemeText type="subtitle" style={styles.text}>Password</ThemeText>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Pressable, View, StyleSheet } from 'react-native';
-import ThemeText from './ThemeText';
+import ThemeText from '../theme/ThemeText';
 import { router } from 'expo-router';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const Header = ({ children }: Props) => {
   return(
     <View style={styles.container}>
-      <Pressable onPress={() => alert('add clicked')}>
+      <Pressable onPress={() => router.push('/NewIngredient')}>
         <Image source={require('../../assets/images/plus-icon.png')} style={styles.plusIcon}/>
       </Pressable>
       <ThemeText type='title'>{children}</ThemeText>

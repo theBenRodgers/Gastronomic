@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ImageBackground, TextInput, View, StyleSheet, TouchableHighlight, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import ThemeText from '@/components/ui/ThemeText';
+import { ImageBackground, TextInput, View, StyleSheet, TouchableHighlight, Alert, Keyboard, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import ThemeText from '@/components/theme/ThemeText';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../firebaseConfig'; 
+import { app } from '@/firebaseConfig';
 import { useRouter } from 'expo-router';
 
 const auth = getAuth(app);
@@ -14,15 +14,25 @@ const LoginScreen = () => {
   const router = useRouter(); 
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Validation Error', 'Please fill in both fields');
+      return;
+    }
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       Alert.alert('Login Successful', `Welcome, ${user.email}`);
-      router.push('/home'); // Navigate to /home (HomeScreen)
+      router.push('/home');
     } catch (error) {
-      console.error(error.message);
-      Alert.alert('Login Failed', error.message);
+      const e = error as Error;
+      console.error(e.message);
+      Alert.alert('Login Failed', e.message);
     }
+  };
+
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
   };
 
   return (
@@ -34,7 +44,7 @@ const LoginScreen = () => {
         >
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <ImageBackground 
-              source={require('../assets/images/splash1-blur-mobile.jpg')} 
+              source={require('../../assets/images/splash1-blur-mobile.jpg')} 
               resizeMode="cover" 
               style={styles.image}
             >
