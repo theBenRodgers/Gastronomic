@@ -12,6 +12,7 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useFocusEffect, useRouter } from "expo-router";
 import getUser from '@/api/users/getUser';
 import putUser from '@/api/users/putUser';
+import Header from '@/components/ui/Header';
 
 const Settings = () => {
   const [fName, setfName] = useState("");
@@ -59,7 +60,7 @@ const Settings = () => {
       setSulfite(intolerances.includes("sulfite"));
       setTreeNut(intolerances.includes("treenut"));
       setWheat(intolerances.includes("wheat"));
-  
+
       // Diets
       setGluFree(diets.includes("gluten free"));
       setKeto(diets.includes("ketogenic"));
@@ -71,7 +72,7 @@ const Settings = () => {
       console.error("Error loading user data:", error);
     }
   };
-  
+
   useFocusEffect(
     React.useCallback(() => {
       loadUser();
@@ -81,7 +82,7 @@ const Settings = () => {
   const handleSubmit = async () => {
     const newDiets = [];
     const newIntolerances = [];
-  
+
     // Diets
     if (isGluFree) newDiets.push("gluten free");
     if (isKeto) newDiets.push("ketogenic");
@@ -89,7 +90,7 @@ const Settings = () => {
     if (isVegan) newDiets.push("vegan");
     if (isPescetarian) newDiets.push("pescetarian");
     if (isPaleo) newDiets.push("paleo");
-  
+
     // Intolerances
     if (isDairy) newIntolerances.push("dairy");
     if (isEgg) newIntolerances.push("egg");
@@ -103,7 +104,7 @@ const Settings = () => {
     if (isSulfite) newIntolerances.push("sulfite");
     if (isTreeNut) newIntolerances.push("tree nut");
     if (isWheat) newIntolerances.push("wheat");
-  
+
     try {
       const updatedUser = {
         fname: fName,
@@ -111,18 +112,21 @@ const Settings = () => {
         diets: newDiets,
         intolerances: newIntolerances,
       };
-  
+
       await putUser(updatedUser);
     } catch (error) {
       console.error("Error saving user data:", error);
     }
   };
-  
-  
+
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["left", "right"]}>
-        <ThemeText type="title">Settings</ThemeText>
+        <Header
+          type="nav"
+          title='Settings'
+        />
         <View style={styles.section}>
           <Text style={styles.subheader}>Account</Text>
           {/* Column 1 */}
@@ -136,23 +140,23 @@ const Settings = () => {
               />
             </View>
           </View>
-        {/* Column 2 */}
-        <View style={styles.column}>
-          <View style={styles.row}>
-            <Text>Last Name</Text>
-            <TextInput
-              style={styles.inputContainer}
-              value={lName}
-              onChangeText={setlName}
-            />
+          {/* Column 2 */}
+          <View style={styles.column}>
+            <View style={styles.row}>
+              <Text>Last Name</Text>
+              <TextInput
+                style={styles.inputContainer}
+                value={lName}
+                onChangeText={setlName}
+              />
+            </View>
           </View>
+          <TouchableHighlight style={styles.buttonContainer} onPress={() => alert("HEy!")}>
+            <View style={styles.button}>
+              <ThemeText style={styles.buttonText}>Change Password</ThemeText>
+            </View>
+          </TouchableHighlight>
         </View>
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => alert("HEy!")}>
-          <View style={styles.button}>
-            <ThemeText style={styles.buttonText}>Change Password</ThemeText>
-          </View>
-        </TouchableHighlight>
-      </View>
         <View style={styles.section}>
           <Text style={styles.subheader}>Diet</Text>
           <View style={styles.columns}>
@@ -308,7 +312,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   buttonText: {
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
   },
   inputContainer: {
 

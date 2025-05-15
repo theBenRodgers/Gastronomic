@@ -40,11 +40,11 @@ const SearchScreen = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-      <Header
+        <Header
           type="nav"
-          title="Add to Pantry"
-          />
-        <View style={{ flex: 1, paddingTop: 60}}>
+          title="Search for Recipes"
+        />
+        <View style={{ flex: 1, paddingTop: 60 }}>
           <View style={styles.row}>
             <Pressable
               onPress={onToggle}

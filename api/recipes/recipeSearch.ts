@@ -3,9 +3,9 @@ import { getURL } from "@/backendConfig";
 import Recipe from "@/interfaces/Recipe";
 import RecipeRequest from "@/interfaces/RecipeRequest";
 
-const recipeSearch = async (request: RecipeRequest): Promise<Recipe[]> => {
+const recipeSearch = async (ingredients: string): Promise<Recipe[]> => {
   try {
-    const API_URL = getURL(`/recipes/search`);
+    const API_URL = getURL(`recipes/search?ingredients=${ingredients}`);
 
     const user = auth.currentUser;
     if (!user) {
@@ -15,12 +15,11 @@ const recipeSearch = async (request: RecipeRequest): Promise<Recipe[]> => {
     const idToken = await user.getIdToken(true);
 
     const response = await fetch(API_URL, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${idToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(request),
     });
 
     if (!response.ok) {
